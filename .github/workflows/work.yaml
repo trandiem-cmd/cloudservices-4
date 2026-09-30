@@ -1,4 +1,4 @@
-name: Build and Webpage to Rahti
+name: Build and Deploy Webpage to Rahti
 
 on:
   push:
@@ -14,21 +14,24 @@ jobs:
 
       - name: Compute lowercase image name
         run: echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}/webpage:${{ github.sha}}" >> $GITHUB_ENV
+
       - name: Build container image
-        run: docker build -t ghcr.io/${{ github.repository }}/backend:${{ github.sha }} ./backend
+        run: docker build -t "${IMAGE}"
 
       - name: Log in to registry
         run: echo "${{ secrets.REGISTRY_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
+      
       - name: Push image
-        run: docker push ghcr.io/${{ github.repository }}/backend:${{ github.sha }}
+        run: docker push "${IMAGE}"
+
       - name: Install oc CLI
-        run:
-          curl -LO https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-client-linux.tar.gz
-          tar -xzf openshift-client-linux.tar.gz
-          sudo mv oc kubectl /usr/local/bin/
+        run: |
+          curl -sLO https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-client-linux.tar.gz
+          tar -xzf oc.tar.gz oc
+          sudo mv oc /usr/local/bin/
+
       - name: Deploy to Rahti
         run: |
-          sed -i "s|IMAGE_TAG|${GITHUB_SHA}|g" deployment.yaml
+          sed -i "s|IMAGE_PLACEHOLDER|$IMAGE" webpage-deployment.yaml
           oc login --token=${{ secrets.RAHTI_TOKEN }} --server=${{ secrets.RAHTI_SERVER }}
           oc apply -f webpage-deployment.yaml

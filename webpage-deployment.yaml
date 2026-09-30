@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webpage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webpage
+  template:
+    metadata:
+      labels:
+        app: webpage
+    spec:
+      containers:
+        - name: webpage
+          image: IMAGE_PLACEHOLDER
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readnessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 15
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webpage
+spec:
+  selector:
+    app: webpage
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: route.openshift.io/v1
+kind: Route 
+metadata:
+  name: webpage
+  labels:
+    app: webpage
+spec:
+  to: 
+    kind: Service
+    name: webpage
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
