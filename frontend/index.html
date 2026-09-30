@@ -1,0 +1,395 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Containerized LEMP Example</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: auto;
+      }
+
+      .hero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        max-width: 1800px;
+        padding: 10px 10px;
+        background: white;
+        margin: auto;
+        padding-left: 20px;
+      }
+      .hero h2 {
+        font-size: 50px;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      .hero h3 {
+        font-size: 30px;
+      }
+      .hero p {
+        font-size: 25px;
+        color: black;
+        margin-bottom: 25px;
+      }
+      .hero div {
+        padding: 10px 0px;
+      }
+      .hero img {
+        max-width: 1000px;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <Session class="hero">
+      <div class="hero-content">
+        <h2>Weekly assignment 5 - Diem Tran</h2>
+        <div>
+          <h2>Frontend (Nginx)</h2>
+          <p style="color: red; text-align: center" id="msg">Loading...</p>
+          <h2>Page views (/api/views):</h2>
+          <p style="color: red; text-align: center" id="views">Loading...</p>
+        </div>
+        <h3 style="color: red">PART 1: ANSWER THE QUESTIONS:</h3>
+        <h3>
+          <u
+            >1. Explain the difference between SAML and OAuth. When would a
+            company choose one over the other ?:</u
+          >
+        </h3>
+        <p><b>1.1 Explain the difference between SAML and OAuth</b></p>
+        <p>
+          The main difference is that SAML focuses on verifying a user’s
+          identity and enabling SSO, while OAuth focuses on granting
+          applications controlled access to resources. SAML is commonly used in
+          enterprise environments, whereas OAuth is widely used for web
+          applications, mobile applications, and API-based services.
+        </p>
+        <p>
+          SAML and OAuth are security standards that serve different purposes:
+        </p>
+        <p>
+          - SAML (Security Assertion Markup Language) is primarily used for
+          authentication and Single Sign-On (SSO). It allows an identity
+          provider to verify a user’s identity and provide access to different
+          applications without requiring the user to log in separately to each
+          one.
+        </p>
+        <p>
+          - OAuth is primarily an authorization framework. It allows an
+          application to access specific resources on behalf of a user without
+          requiring the user to share their password. For example, an
+          application can use OAuth to access a user’s data through an API with
+          the user’s permission.
+        </p>
+        <p><b>1.2 When would a company choose one over the other ?</b></p>
+        <p>
+          A company would choose between SAML and OAuth depending on its
+          security and application requirements.
+        </p>
+        <p>
+          SAML is mainly used for authentication and Single Sign-On (SSO),
+          making it suitable for large organizations such as governments,
+          healthcare institutions, and enterprises that need centralized access
+          control for many users and sensitive data. It is especially common in
+          enterprise and browser-based environments.
+        </p>
+        <p>
+          OAuth is primarily designed for authorization. It allows applications
+          to access specific user resources without requiring the user's
+          password. OAuth is therefore more suitable for modern web and mobile
+          applications, APIs, and situations where flexible access and user
+          experience are important. OAuth relies on HTTPS/TLS to protect
+          communication.
+        </p>
+        <p>
+          SAML is generally preferred for enterprise authentication and SSO,
+          while OAuth is preferred for delegated authorization and resource
+          access.
+        </p>
+        <p>
+          <i
+            >Source:
+            https://www.fortinet.com/resources/cyberglossary/saml-vs-oauth</i
+          >
+        </p>
+        <h3>
+          <u
+            >2. What is a Web Application Firewall (WAF) and what kinds of
+            attacks does it defend against? Where would you place one in the
+            three-container architecture you built in Week 4 (Route -> frontend
+            -> backend -> db)?:</u
+          >
+        </h3>
+        <p><b>2.1 What is a Web Application Firewall (WAF)?</b></p>
+        <p>
+          A Web Application Firewall (WAF) protects web applications by
+          filtering and monitoring HTTP traffic between the application and the
+          Internet. It can defend against common attacks such as Cross-Site
+          Scripting (XSS), Cross-Site Request Forgery (CSRF), file inclusion,
+          and SQL injection. A WAF operates at Layer 7 (Application Layer) of
+          the OSI model and is not designed to protect against every type of
+          attack, so it is usually combined with other security measures. It
+          acts as a reverse proxy, placing a layer of protection between clients
+          and the web server. WAF protection is based on security rules or
+          policies that identify and block malicious traffic. These policies can
+          also be quickly modified to respond to new threats, such as applying
+          rate limiting during a DDoS attack.
+        </p>
+        <p>
+          <i
+            >Source:
+            https://www.cloudflare.com/learning/ddos/glossary/web-application-firewall-waf/</i
+          >
+        </p>
+        <p><b>2.2 What kinds of attacks does it defend against?</b></p>
+        <p>A WAF can help protect against common web attacks such as:</p>
+        <p>
+          - SQL Injection (SQLi): malicious SQL commands inserted into
+          application requests.
+        </p>
+        <p>
+          - Cross-Site Scripting (XSS):injecting malicious scripts into web
+          pages.
+        </p>
+        <p>
+          - Path Traversal:attempting to access files or directories outside the
+          intended application directory.
+        </p>
+        <p>
+          - Command Injection: attempting to execute unauthorized commands on
+          the server.
+        </p>
+        <p>
+          - HTTP request attacks: such as malicious or malformed requests
+          designed to exploit web applications.
+        </p>
+        <p>
+          <b
+            >2.3 Where would you place one in the three-container architecture
+            you built in Week 4 (Route -> frontend -> backend -> db)?</b
+          >
+        </p>
+        <p>User → WAF → Route → Frontend → Backend → Database</p>
+        <p>
+          The WAF should generally be placed before the application traffic
+          reaches the frontend
+        </p>
+        <p>
+          The WAF acts as the first security layer, inspecting incoming
+          HTTP/HTTPS requests and blocking suspicious traffic before it reaches
+          the application containers. This placement allows it to protect the
+          frontend and, indirectly, the backend and database from attacks
+          originating through web requests. However, a WAF is not a replacement
+          for application-level security. Authentication, input validation,
+          access control, and secure database practices should still be
+          implemented within the application itself.
+        </p>
+        <h3>
+          <u
+            >3. Describe how a decentralized or cooperative storage network (for
+            example Sia or IPFS) differs from centralized object storage such as
+            Allas or Amazon S3. What are the trade-offs ?</u
+          >
+        </h3>
+        <p>
+          <b
+            >3.1 Describe how a decentralized or cooperative storage network
+            (for example Sia or IPFS) differs from centralized object storage
+            such as Allas or Amazon S3.</b
+          >
+        </p>
+        <p>The main difference is how data is stored and managed.</p>
+        <p>
+          In a decentralized or cooperative storage network, data is distributed
+          across multiple nodes rather than being controlled by a single storage
+          provider. This can reduce dependence on one organization and provide
+          greater decentralization, but performance and availability may depend
+          on the participating nodes.
+        </p>
+        <p>
+          Centralized object storage such as Allas or Amazon S3 is operated by a
+          specific provider. The provider manages the infrastructure,
+          replication, availability, and access control, making it generally
+          easier for organizations to manage and integrate into applications.
+        </p>
+        <p>
+          The key distinction is that decentralized storage distributes
+          responsibility across multiple participants, whereas centralized
+          object storage relies on a single provider to manage the storage
+          infrastructure.
+        </p>
+        <p><b>3.1 What are the trade-offs ?</b></p>
+        <p>
+          The main trade-offs between decentralized/cooperative storage and
+          centralized object storage are related to control, performance,
+          reliability, cost, and complexity.
+        </p>
+        <p>
+          Decentralized storage provides greater distribution and reduces
+          dependence on a single provider, but may introduce more complexity and
+          less predictable performance. Centralized storage is generally easier
+          to manage and provides more predictable performance and availability,
+          but users depend more heavily on the provider and its infrastructure.
+        </p>
+        <h3>
+          <u
+            >4. What is YAML and why has it become the default configuration
+            format for Kubernetes/Rahti manifests? Compare it briefly to
+            JSON.</u
+          >
+        </h3>
+        <p><b>4.1 What is YAML ?</b></p>
+        <p>
+          Kubernetes is dependent on YAML (YAML Ain't Markup Language) as its
+          configuration language. YAML makes managing and deploying Kubernetes
+          more easy and simple. In this article, we'll cover all the aspects of
+          using YAML in Kubernetes.
+        </p>
+        <p>
+          <b
+            >4.2 Why has it become the default configuration format for
+            Kubernetes/Rahti manifests?</b
+          >
+        </p>
+        <p>
+          ML is widely used in Kubernetes/Rahti because it provides a simple and
+          readable way to declaratively describe application configurations and
+          infrastructure resources.
+        </p>
+        <p>
+          - Human-readable: Simple syntax using indentation and key-value pairs,
+          making configurations easy to read and edit.
+        </p>
+        <p>
+          - Expressive: Supports nested structures, lists, and comments, which
+          are useful for defining complex Kubernetes resources.
+        </p>
+        <p>
+          - Easy to maintain: Its clear structure makes configurations easier to
+          organize, update, and troubleshoot.
+        </p>
+        <p>
+          - Community standard: Widely adopted by Kubernetes, so there are many
+          examples, tutorials, and documentation available.
+        </p>
+        <p>
+          - Good tooling: Editors provide features such as syntax highlighting,
+          autocompletion, and validation.
+        </p>
+        <p>
+          <i
+            >Source:
+            https://www.geeksforgeeks.org/devops/what-is-yaml-in-kubernetes/</i
+          >
+        </p>
+        <p><b>4.3 Compare it briefly to JSON.</b></p>
+        <p>
+          - Readability: YAML is generally easier for humans to read because it
+          uses indentation; JSON uses braces {} and brackets [].
+        </p>
+        <p>
+          - Syntax: YAML has simpler and less verbose syntax, while JSON
+          requires more punctuation such as quotes and commas.
+        </p>
+        <p>- Comments: YAML supports comments; standard JSON does not.</p>
+        <p>
+          - Structure: Both can represent nested data, lists, and key-value
+          pairs.
+        </p>
+        <p>
+          - Kubernetes: YAML is preferred because Kubernetes manifests are
+          easier to read, write, and maintain in YAML.
+        </p>
+        <p>
+          <i
+            >Source:
+            https://aws.amazon.com/compare/the-difference-between-yaml-and-json/</i
+          >
+        </p>
+        <h3 style="color: red">
+          PART 2: DOCUMENTATION ABOUT PRACTICAL TASK: REDIS CACHE
+        </h3>
+        <p><b>
+          Step 1: Create redis-deployment.yaml and redis-service.yaml files:</b>
+        </p>
+        <p>
+          - I created the Redis Deployment, which manages the Redis Pod and
+          container.
+        </p>
+        <p>oc apply -f rahti/redis-deployment.yaml</p>
+        <p>
+          - Then, I created the Redis Service, allowing the backend to connect to Redis
+          through a stable hostname and port.
+        </p>
+        <p>oc apply -f rahti/redis-service.yaml</p>
+        <img src="https://a3s.fi/swift/v1/myimage/redis-deployment.png" />
+        <p><b>Step 2: Update configmap.yaml</b></p>
+        <p>- Add 'REDIS_HOST: "cache"' in to configmap.yaml file</p>
+        <p>- Then, apply it again</p>
+        <p><b>
+          Step 3: Updated the backend to connect to Redis and added an endpoint
+          that uses Redis to store and increment a view counter.</b>
+        </p>
+        <p>
+          - The backend was then rebuilt and deployed so it could communicate with
+          the Redis service running in OpenShift.
+        </p>
+        <p>
+          - Build and push the new backend image, then re-apply
+          backend-deployment.yaml with the updated image version.
+        </p>
+        <img src="https://a3s.fi/swift/v1/myimage/redis-deploy-backend.png" />
+        
+        <p><b>
+          Step 4: Verify that the frontend, backend, MySQL, and Redis are working
+          together correctly.</b>
+        </p>
+          <img src="https://a3s.fi/swift/v1/myimage/redis-verify.png" />     
+        <p>
+          - After applying the updated backend, test the Redis endpoint and
+          compare its result with the existing MySQL-based counter.
+        </p>
+        <p>
+          This demonstrates that Redis is working independently from MySQL and
+          highlights the difference between using Redis for fast, temporary
+          counters and MySQL for persistent data storage.
+        </p>
+        <img src="https://a3s.fi/swift/v1/myimage/redis-compare-result.png" />
+      </div>
+    </Session>
+    <script>
+      // Existing database read
+      fetch("/api")
+        .then((r) => r.json())
+        .then((d) => {
+          document.getElementById("msg").innerText = d.message;
+        })
+        .catch((e) => {
+          document.getElementById("msg").innerText = "API error: " + e;
+        });
+
+      // Database write: increment page-view counter
+      fetch("/api/views", {
+        method: "POST",
+      })
+        .then((r) => r.json())
+        .then((d) => {
+          document.getElementById("views").innerText = d.views;
+        })
+        .catch((e) => {
+          document.getElementById("views").innerText =
+            "View counter error: " + e;
+        });
+    </script>
+  </body>
+</html>
