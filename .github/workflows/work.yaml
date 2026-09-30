@@ -26,7 +26,7 @@ jobs:
       - name: Install oc CLI
         run: |
           curl -sLO https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/openshift-client-linux.tar.gz
-          tar -xzf oc.tar.gz oc
+          tar -xzf openshift-client-linux.tar.gz oc
           sudo mv oc /usr/local/bin/
 
       - name: Deploy to Rahti
