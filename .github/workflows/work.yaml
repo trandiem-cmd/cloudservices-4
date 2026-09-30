@@ -31,6 +31,6 @@ jobs:
 
       - name: Deploy to Rahti
         run: |
-          sed -i "s|IMAGE_PLACEHOLDER|$IMAGE" webpage-deployment.yaml
+          sed -i "s|IMAGE_PLACEHOLDER|$IMAGE|" webpage-deployment.yaml
           oc login --token=${{ secrets.RAHTI_TOKEN }} --server=${{ secrets.RAHTI_SERVER }}
           oc apply -f webpage-deployment.yaml
