@@ -33,4 +33,5 @@ jobs:
         run: |
           sed -i "s|IMAGE_PLACEHOLDER|$IMAGE|" webpage-deployment.yaml
           oc login --token=${{ secrets.RAHTI_TOKEN }} --server=${{ secrets.RAHTI_SERVER }}
+          oc project cloud-service-3
           oc apply -f webpage-deployment.yaml
