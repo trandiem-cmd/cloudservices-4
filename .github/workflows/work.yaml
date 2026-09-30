@@ -16,7 +16,7 @@ jobs:
         run: echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}/webpage:${{ github.sha}}" >> $GITHUB_ENV
 
       - name: Build container image
-        run: docker build -t "${IMAGE}" .
+        run: docker build -t "${IMAGE}" -f frontend/Dockerfile .
       - name: Log in to registry
         run: echo "${{ secrets.REGISTRY_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       
