@@ -219,7 +219,7 @@
           <br>- Logs in to the Rahti/OpenShift cluster and deploys the new image by updating the Kubernetes Deployment. 
           <br>- Secrets such as REGISTRY_TOKEN, RAHTI_TOKEN, and RAHTI_SERVER are stored as GitHub repository secrets instead of being written directly in the workflow file.
           <p>This automates the build, image publishing, and deployment process, so a successful GitHub Actions run provides evidence that the CI/CD pipeline worked correctly.</pre></p>
-          <p><a href=".github\workflows\work.yaml"  target="_blank">My workflow YAML file:</a></p>
+          <p><a href="https://github.com/trandiem-cmd/cloudservices-4/blob/main/.github/workflows/work.yaml" target="_blank">My workflow YAML file</a></p>
           <img src="https://a3s.fi/swift/v1/myimage/work.yaml.png" />
           <p>Then, create REGISTRY_TOKEN, RAHTI_TOKEN, RAHTI_SERVER on 'Secrets and variables/Actions'</p>
           <p>get rahti_server: oc whoami --show-server</p>
