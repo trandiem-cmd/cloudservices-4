@@ -247,8 +247,9 @@
           <p><b>- Step 3: Restore the Readiness Probe </b></p>
           <p>Change the readiness probe back to the correct port (8080). Push the changes to GitHub and wait for the deployment to complete. Verify that the Pod returns to 1/1 Ready and is included in the Service endpoints again.</p>
           <h4>2. A sample of the logs your app now produces, and a short reflection on what a real alert rule based on them might look like.</h4>
-          <p style="margin-top: 20px;"><b>- Step 1: Generate a request to the backend API and </b></p>
+          <p style="margin-top: 20px;"><b>- Step 1: Generate a request to the backend API</b></p>
           <p>- Edit backend/app.py file and deploy the updated backend/app.py to Rahti.</p>
+          <p>- Send a request to a backend endpoint, for example /api/health.</p>
           <img src="https://a3s.fi/swift/v1/myimage/backend-app.py.png" />
           <p><b>- Step 2: Run oc logs to check the application logs and identity the structured fields, including the HTTP method, request path, status code, and response time.</b></p>
           <img src="https://a3s.fi/swift/v1/myimage/structured-logs.png" />
