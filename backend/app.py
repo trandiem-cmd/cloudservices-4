@@ -1,5 +1,7 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import os
+import time
+import json
 import mysql.connector
 import redis
 
@@ -9,12 +11,35 @@ DB_HOST = os.getenv('DB_HOST', 'db')
 DB_USER = os.getenv('DB_USER', 'appuser')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_NAME = os.getenv('DB_NAME', 'appdb')
-REDIS_HOST = os.getenv('REDIS_HOST','cache')
+REDIS_HOST = os.getenv('REDIS_HOST', 'cache')
+
 r = redis.Redis(
     host=os.environ.get("REDIS_HOST", "cache"),
     port=6379,
     decode_responses=True
 )
+
+
+@app.after_request
+def log_request(response):
+    duration = (time.time() - request.start_time) * 1000
+
+    log_data = {
+        "method": request.method,
+        "path": request.path,
+        "status": response.status_code,
+        "responseTimeMs": round(duration, 2)
+    }
+
+    print(json.dumps(log_data), flush=True)
+
+    return response
+
+
+@app.before_request
+def start_timer():
+    request.start_time = time.time()
+
 
 @app.get('/api/health')
 def health():
@@ -89,10 +114,12 @@ def add_view():
 
     return jsonify(views=row[0])
 
+
 @app.get('/api/view')
 def view():
     count = r.incr('view_count')
     return jsonify(view=count)
+
 
 @app.get('/api/views')
 def get_views():
@@ -117,4 +144,4 @@ def get_views():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=False)

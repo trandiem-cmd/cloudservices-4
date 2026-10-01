@@ -34,7 +34,12 @@
       }
       .hero h3 {
         font-size: 30px;
+        font-weight: bold;
       }
+      .hero h4 {
+        font-size: 25px;
+        font-weight: bold;
+      }      
       .hero p {
         font-size: 25px;
         color: black;
@@ -47,325 +52,215 @@
         max-width: 1000px;
         height: auto;
       }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 28px;margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #999;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th:first-child,
+    td:first-child {
+      width: 18%;
+    }
     </style>
   </head>
   <body>
     <Session class="hero">
       <div class="hero-content">
-        <h2>Weekly assignment 5 - Diem Tran</h2>
+        <h2>Weekly assignment 6 - Diem Tran</h2>
         <div>
-          <h2>Frontend (Nginx)</h2>
-          <p style="color: red; text-align: center" id="msg">Loading...</p>
-          <h2>Page views (/api/views):</h2>
-          <p style="color: red; text-align: center" id="views">Loading...</p>
+          <!--<h2>Frontend (Nginx)</h2>
+          <p style="color: red; text-align: center" id="msg">Loading...</p> -->
+          <h3 style="display: inline;">Page views (/api/views):</h3>
+          <h3 style="color: red; text-align: center;display: inline" id="views">Loading...</h3>
         </div>
-        <h3 style="color: red">PART 1: ANSWER THE QUESTIONS:</h3>
+        <h3 style="color: red">PART A: ANSWER THE QUESTIONS:</h3>
         <h3>
-          <u
-            >1. Explain the difference between SAML and OAuth. When would a
-            company choose one over the other ?:</u
-          >
+          <u>1. Explain the difference between Continuous Integration, Continuous Delivery and Continuous Deployment.</u>
         </h3>
-        <p><b>1.1. Explain the difference between SAML and OAuth.</b></p>
-        <p>
-          The main difference is that SAML focuses on verifying a user’s
-          identity and enabling SSO, while OAuth focuses on granting
-          applications controlled access to resources. SAML is commonly used in
-          enterprise environments, whereas OAuth is widely used for web
-          applications, mobile applications, and API-based services.
-        </p>
-        <p>
-          SAML and OAuth are security standards that serve different purposes:
-        </p>
-        <p>
-          - SAML (Security Assertion Markup Language) is primarily used for
-          authentication and Single Sign-On (SSO). It allows an identity
-          provider to verify a user’s identity and provide access to different
-          applications without requiring the user to log in separately to each
-          one.
-        </p>
-        <p>
-          - OAuth is primarily an authorization framework. It allows an
-          application to access specific resources on behalf of a user without
-          requiring the user to share their password. For example, an
-          application can use OAuth to access a user’s data through an API with
-          the user’s permission.
-        </p>
-        <p><b>1.2 When would a company choose one over the other ?</b></p>
-        <p>
-          A company would choose between SAML and OAuth depending on its
-          security and application requirements.
-        </p>
-        <p>
-          SAML is mainly used for authentication and Single Sign-On (SSO),
-          making it suitable for large organizations such as governments,
-          healthcare institutions, and enterprises that need centralized access
-          control for many users and sensitive data. It is especially common in
-          enterprise and browser-based environments.
-        </p>
-        <p>
-          OAuth is primarily designed for authorization. It allows applications
-          to access specific user resources without requiring the user's
-          password. OAuth is therefore more suitable for modern web and mobile
-          applications, APIs, and situations where flexible access and user
-          experience are important. OAuth relies on HTTPS/TLS to protect
-          communication.
-        </p>
-        <p>
-          SAML is generally preferred for enterprise authentication and SSO,
-          while OAuth is preferred for delegated authorization and resource
-          access.
-        </p>
-        <p>
-          <i
-            >Source:
-            https://www.fortinet.com/resources/cyberglossary/saml-vs-oauth</i
-          >
-        </p>
+        <p>- Continuous Integration (CI) focuses on frequently integrating code changes into a shared repository and automatically building and testing the code to detect problems early. </p>
+        <p>- Continuous Delivery automates the build, testing, and preparation of validated code so that the application is always in a releasable state.</p>
+        <p>- Continuous Deployment goes one step further: changes that pass the automated tests are automatically deployed to production without a manual approval step.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>Continuous Integration (CI)</th>
+              <th>Continuous Delivery (CD)</th>
+              <th>Continuous Deployment (CD)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Main purpose</td>
+              <td>Integrate code changes frequently</td>
+              <td>Keep the application ready for release</td>
+              <td>Automatically deploy changes to production</td>
+            </tr>
+            <tr>
+              <td>Main activities</td>
+              <td>Merge code, build, and run automated tests</td>
+              <td>Build, test, and prepare validated code for release</td>
+              <td>Automatically release and deploy validated changes</td>
+            </tr>
+            <tr>
+              <td>Automation level</td>
+              <td>Automates integration, build, and testing</td>
+              <td>Automates the delivery process but may include a manual approval</td>
+              <td>Fully automates deployment after successful tests</td>
+            </tr>
+            <tr>
+              <td>Production deployment</td>
+              <td>Not the main focus</td>
+              <td>Usually requires a manual approval or release step</td>
+              <td>Automatically deployed without manual approval</td>
+            </tr>
+            <tr>
+              <td>Goal</td>
+              <td>Detect integration problems early</td>
+              <td>Keep software in a releasable state</td>
+              <td>Deliver new changes to users as quickly as possible</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top: 20px;"><i>Source: https://www.redhat.com/en/topics/devops/what-is-ci-cd</i></p>
+        <h3 >
+          <u>2. Describe the structure of a GitHub Actions workflow (triggers, jobs, steps). What would a minimal pipeline for the app you built in Week 4/5 need to do?:</u>
+        </h3>
+        <p style="margin-top: 20px;"><b>2.1. A GitHub Actions workflow: is defined in a YAML file and consists mainly of triggers, jobs, and steps.</b></p>
+        <p>- Triggers: Events that start the workflow, such as a push to the main branch or the creation of a pull request.</p>
+        <p>- Jobs: Groups of tasks that GitHub Actions executes on a runner. Jobs can run sequentially or in parallel.</p>
+        <p>- Steps: Individual actions or commands executed within a job, such as checking out source code, building an image, or deploying an application.</p>
+        <p><b>2.2. A minimal pipeline for the app you built in Week 4/5:</b></p>
+        <p>- Trigger the workflow when new code is pushed to the repository.</p>
+        <p>- Check out the source code so that the workflow runner has access to the application files.</p>
+        <p>- Build the Docker image for the application.</p>
+        <p>- Push the image to a container registry, such as GitHub Container Registry.</p>
+        <p>- Deploy the updated image to Rahti/OpenShift using the OpenShift CLI.</p>
+        <p>- Verify the deployment by checking that the new Pod is running successfully.</p>
+        <p><i>Source:https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows</i>
         <h3>
-          <u
-            >2. What is a Web Application Firewall (WAF) and what kinds of
-            attacks does it defend against? Where would you place one in the
-            three-container architecture you built in Week 4 (Route -> frontend
-            -> backend -> db)?:</u
-          >
+          <u>3. Compare the three deployment-automation patterns discussed (imperative CLI step, ImageStream trigger, GitOps). What are the security trade-offs of each, particularly around who holds cluster credentials?</u>
         </h3>
-        <p><b>2.1 What is a Web Application Firewall (WAF)?</b></p>
+        <p style="margin-top: 20px;">The three deployment-automation patterns differ mainly in how the deployment is triggered and where the cluster credentials are stored.</p>
+        <p>- Imperative CLI step: The CI pipeline directly connects to the OpenShift cluster and runs commands such as oc apply. This approach is simple and easy to implement, but the CI system must hold cluster credentials. Therefore, if the CI credentials are compromised, an attacker may be able to directly modify the cluster.</p>
+        <p>- ImageStream trigger: In this approach, OpenShift monitors an ImageStream and automatically starts a deployment when a new image is available. This reduces the need for the CI pipeline to have direct cluster access. However, access to the container registry and ImageStream must be protected because an unauthorized image update could trigger a deployment.</p>
+        <p>- GitOps: The desired cluster configuration is stored in a Git repository, and a GitOps controller inside the cluster applies the changes. The cluster credentials are therefore held by the controller rather than the CI pipeline. This provides stronger separation between CI and cluster access, although it requires more infrastructure and configuration.</p>
+        <p><b>The security trade-offs:</b></p>
+        <p>The main security trade-off is therefore where the authority to change the cluster is located. The imperative CLI approach gives more direct control to the CI system, while ImageStream and GitOps can reduce direct cluster access from CI. GitOps provides the clearest separation of responsibilities, but also introduces additional complexity.</p>
         <p>
-          A Web Application Firewall (WAF) protects web applications by
-          filtering and monitoring HTTP traffic between the application and the
-          Internet. It can defend against common attacks such as Cross-Site
-          Scripting (XSS), Cross-Site Request Forgery (CSRF), file inclusion,
-          and SQL injection. A WAF operates at Layer 7 (Application Layer) of
-          the OSI model and is not designed to protect against every type of
-          attack, so it is usually combined with other security measures. It
-          acts as a reverse proxy, placing a layer of protection between clients
-          and the web server. WAF protection is based on security rules or
-          policies that identify and block malicious traffic. These policies can
-          also be quickly modified to respond to new threats, such as applying
-          rate limiting during a DDoS attack.
+        <p><i>Source:https://octopus.com/devops/gitops/gitops-vs-traditional-workflow/</i>
         </p>
-        <p>
-          <i
-            >Source:
-            https://www.cloudflare.com/learning/ddos/glossary/web-application-firewall-waf/</i
-          >
-        </p>
-        <p><b>2.2 What kinds of attacks does it defend against?</b></p>
-        <p>A WAF can help protect against common web attacks such as:</p>
-        <p>
-          - SQL Injection (SQLi): malicious SQL commands inserted into
-          application requests.
-        </p>
-        <p>
-          - Cross-Site Scripting (XSS):injecting malicious scripts into web
-          pages.
-        </p>
-        <p>
-          - Path Traversal:attempting to access files or directories outside the
-          intended application directory.
-        </p>
-        <p>
-          - Command Injection: attempting to execute unauthorized commands on
-          the server.
-        </p>
-        <p>
-          - HTTP request attacks: such as malicious or malformed requests
-          designed to exploit web applications.
-        </p>
-        <p>
-          <b
-            >2.3 Where would you place one in the three-container architecture
-            you built in Week 4 (Route -> frontend -> backend -> db)?</b
-          >
-        </p>
-        <p>User → WAF → Route → Frontend → Backend → Database</p>
-        <p>
-          The WAF should generally be placed before the application traffic
-          reaches the frontend
-        </p>
-        <p>
-          The WAF acts as the first security layer, inspecting incoming
-          HTTP/HTTPS requests and blocking suspicious traffic before it reaches
-          the application containers. This placement allows it to protect the
-          frontend and, indirectly, the backend and database from attacks
-          originating through web requests. However, a WAF is not a replacement
-          for application-level security. Authentication, input validation,
-          access control, and secure database practices should still be
-          implemented within the application itself.
-        </p>
+        <p></p>
         <h3>
-          <u
-            >3. Describe how a decentralized or cooperative storage network (for
-            example Sia or IPFS) differs from centralized object storage such as
-            Allas or Amazon S3. What are the trade-offs ?</u
-          >
+          <u>4. What are the three pillars of observability (metrics, logs, traces)? Give an example of a question each one is best suited to answer.</u>
         </h3>
-        <p>
-          <b
-            >3.1 Describe how a decentralized or cooperative storage network
-            (for example Sia or IPFS) differs from centralized object storage
-            such as Allas or Amazon S3.</b
-          >
-        </p>
-        <p>The main difference is how data is stored and managed.</p>
-        <p>
-          In a decentralized or cooperative storage network, data is distributed
-          across multiple nodes rather than being controlled by a single storage
-          provider. This can reduce dependence on one organization and provide
-          greater decentralization, but performance and availability may depend
-          on the participating nodes.
-        </p>
-        <p>
-          Centralized object storage such as Allas or Amazon S3 is operated by a
-          specific provider. The provider manages the infrastructure,
-          replication, availability, and access control, making it generally
-          easier for organizations to manage and integrate into applications.
-        </p>
-        <p>
-          The key distinction is that decentralized storage distributes
-          responsibility across multiple participants, whereas centralized
-          object storage relies on a single provider to manage the storage
-          infrastructure.
-        </p>
-        <p><b>3.1 What are the trade-offs ?</b></p>
-        <p>
-          The main trade-offs between decentralized/cooperative storage and
-          centralized object storage are related to control, performance,
-          reliability, cost, and complexity.
-        </p>
-        <p>
-          Decentralized storage provides greater distribution and reduces
-          dependence on a single provider, but may introduce more complexity and
-          less predictable performance. Centralized storage is generally easier
-          to manage and provides more predictable performance and availability,
-          but users depend more heavily on the provider and its infrastructure.
-        </p>
-        <h3>
-          <u
-            >4. What is YAML and why has it become the default configuration
-            format for Kubernetes/Rahti manifests? Compare it briefly to
-            JSON.</u
-          >
-        </h3>
-        <p><b>4.1 What is YAML ?</b></p>
-        <p>
-          Kubernetes is dependent on YAML (YAML Ain't Markup Language) as its
-          configuration language. YAML makes managing and deploying Kubernetes
-          more easy and simple. In this article, we'll cover all the aspects of
-          using YAML in Kubernetes.
-        </p>
-        <p>
-          <b
-            >4.2 Why has it become the default configuration format for
-            Kubernetes/Rahti manifests?</b
-          >
-        </p>
-        <p>
-          ML is widely used in Kubernetes/Rahti because it provides a simple and
-          readable way to declaratively describe application configurations and
-          infrastructure resources.
-        </p>
-        <p>
-          - Human-readable: Simple syntax using indentation and key-value pairs,
-          making configurations easy to read and edit.
-        </p>
-        <p>
-          - Expressive: Supports nested structures, lists, and comments, which
-          are useful for defining complex Kubernetes resources.
-        </p>
-        <p>
-          - Easy to maintain: Its clear structure makes configurations easier to
-          organize, update, and troubleshoot.
-        </p>
-        <p>
-          - Community standard: Widely adopted by Kubernetes, so there are many
-          examples, tutorials, and documentation available.
-        </p>
-        <p>
-          - Good tooling: Editors provide features such as syntax highlighting,
-          autocompletion, and validation.
-        </p>
-        <p>
-          <i
-            >Source:
-            https://www.geeksforgeeks.org/devops/what-is-yaml-in-kubernetes/</i
-          >
-        </p>
-        <p><b>4.3 Compare it briefly to JSON.</b></p>
-        <p>
-          - Readability: YAML is generally easier for humans to read because it
-          uses indentation; JSON uses braces {} and brackets [].
-        </p>
-        <p>
-          - Syntax: YAML has simpler and less verbose syntax, while JSON
-          requires more punctuation such as quotes and commas.
-        </p>
-        <p>- Comments: YAML supports comments; standard JSON does not.</p>
-        <p>
-          - Structure: Both can represent nested data, lists, and key-value
-          pairs.
-        </p>
-        <p>
-          - Kubernetes: YAML is preferred because Kubernetes manifests are
-          easier to read, write, and maintain in YAML.
-        </p>
-        <p>
-          <i
-            >Source:
-            https://aws.amazon.com/compare/the-difference-between-yaml-and-json/</i
-          >
-        </p>
-        <h3 style="color: red">
-          PART 2: DOCUMENTATION ABOUT PRACTICAL TASK: REDIS CACHE
-        </h3>
-        <p><b>
-          Step 1: Create redis-deployment.yaml and redis-service.yaml files:</b>
-        </p>
-        <p>
-          - I created the Redis Deployment, which manages the Redis Pod and
-          container.
-        </p>
-        <p>oc apply -f rahti/redis-deployment.yaml</p>
-        <p>
-          - Then, I created the Redis Service, allowing the backend to connect to Redis
-          through a stable hostname and port.
-        </p>
-        <p>oc apply -f rahti/redis-service.yaml</p>
-        <img src="https://a3s.fi/swift/v1/myimage/redis-deployment.png" />
-        <p><b>Step 2: Update configmap.yaml</b></p>
-        <p>- Add 'REDIS_HOST: "cache"' in to configmap.yaml file</p>
-        <p>- Then, apply it again</p>
-        <p><b>
-          Step 3: Updated the backend to connect to Redis and added an endpoint
-          that uses Redis to store and increment a view counter.</b>
-        </p>
-        <p>
-          - The backend was then rebuilt and deployed so it could communicate with
-          the Redis service running in OpenShift.
-        </p>
-        <p>
-          - Build and push the new backend image, then re-apply
-          backend-deployment.yaml with the updated image version.
-        </p>
-        <img src="https://a3s.fi/swift/v1/myimage/redis-deploy-backend.png" />
+<table style="width: 100%; border-collapse: collapse;font-size: 28px;margin-top: 20px;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #999; padding: 10px; width: 18%;">Pillar</th>
+      <th style="border: 1px solid #999; padding: 10px;">Description</th>
+      <th style="border: 1px solid #999; padding: 10px;">Example question it answers best</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid #999; padding: 10px;"><b>Metrics</b></td>
+      <td style="border: 1px solid #999; padding: 10px;">
+        Numerical measurements collected over time, such as CPU usage,
+        request rate, error rate, and response time.
+      </td>
+      <td style="border: 1px solid #999; padding: 10px;">
+        “Is the application experiencing a high error rate or increased
+        response time?”
+      </td>
+    </tr>
+
+    <tr>
+      <td style="border: 1px solid #999; padding: 10px;"><b>Logs</b></td>
+      <td style="border: 1px solid #999; padding: 10px;">
+        Records of events generated by the application or system, such as
+        requests, errors, status codes, and messages.
+      </td>
+      <td style="border: 1px solid #999; padding: 10px;">
+        “What exactly happened when this request failed?”
+      </td>
+    </tr>
+
+    <tr>
+      <td style="border: 1px solid #999; padding: 10px;"><b>Traces</b></td>
+      <td style="border: 1px solid #999; padding: 10px;">
+        Records the path of a request across different services and shows
+        how much time is spent in each component.
+      </td>
+      <td style="border: 1px solid #999; padding: 10px;">
+        “Which service is causing this request to be slow?”
+      </td>
+    </tr>
+  </tbody>
+</table>
+        <p style="margin-top: 20px;"><i>Source: https://www.ibm.com/think/insights/observability-pillars</i></p>
         
-        <p><b>
-          Step 4: Verify that the frontend, backend, MySQL, and Redis are working
-          together correctly.</b>
-        </p>
-          <img src="https://a3s.fi/swift/v1/myimage/redis-verify.png" />     
-        <p>
-          - After applying the updated backend, test the Redis endpoint and
-          compare its result with the existing MySQL-based counter.
-        </p>
-        <p>
-          This demonstrates that Redis is working independently from MySQL and
-          highlights the difference between using Redis for fast, temporary
-          counters and MySQL for persistent data storage.
-        </p>
-        <img src="https://a3s.fi/swift/v1/myimage/redis-compare-result.png" />
-      </div>
+        <h3 style="color: red">PART B: Hands-On: Automate & Observe my App</h3>
+        <div>
+          <h3><u>Part 1: A CI/CD Pipeline</u></h3>
+          <h4 style="margin-top: 20px;">1. My workflow YAML file, and a successful run in the GitHub Actions tab</h4>
+          <p>I chose the option: a GitHub Actions workflow that builds a container image for frontend to Rahti </p>
+          <p><b>- Step 1: I create work.yaml file in .github/workflows folder</b></p>
+          <p>The workflow file defines the CI/CD pipeline for the application. It is triggered when changes are pushed to the GitHub repository.  The workflow:
+          <br>- Compute lowercase image name
+          <br>- Logs in to GitHub Container Registry
+          <br>- Builds the frontend Docker image, tags it with the Git commit SHAand pushes the image to the registry. 
+          <br>- Logs in to the Rahti/OpenShift cluster and deploys the new image by updating the Kubernetes Deployment. 
+          <br>- Secrets such as REGISTRY_TOKEN, RAHTI_TOKEN, and RAHTI_SERVER are stored as GitHub repository secrets instead of being written directly in the workflow file.
+          <p>This automates the build, image publishing, and deployment process, so a successful GitHub Actions run provides evidence that the CI/CD pipeline worked correctly.</pre></p>
+          <p><a href=".github\workflows\work.yaml"  target="_blank">My workflow YAML file:</a></p>
+          <img src="https://a3s.fi/swift/v1/myimage/work.yaml.png" />
+          <p>Then, create REGISTRY_TOKEN, RAHTI_TOKEN, RAHTI_SERVER on 'Secrets and variables/Actions'</p>
+          <p>get rahti_server: oc whoami --show-server</p>
+          <p>get rahti_token: oc whoami -t</p>
+          <p><img src="https://a3s.fi/swift/v1/myimage/secrets.png" /></p>
+          <p>Remember: find and set the 'packages' status: public on Github</p>
+          <p><b>- Step 2: Push codes and check successful GitHub Actions run</b></p>
+          <img src="https://a3s.fi/swift/v1/myimage/github-actions-run.png" />
+          <h4>2. Evidence that a commit actually triggered a new deployment:</h4>
+          <p style="margin-top: 20px;">A new Git commit triggered the GitHub Actions workflow.</p>
+          <p>The deployment was updated with the new container image, and a new Pod was created with the updated image/start time.</p>
+          <img src="https://a3s.fi/swift/v1/myimage/triggered-new-deployment.png" />
+        </div>
+        <div>
+          <h3><u>Part 2: Basic Observability</u></h3>
+          <h4 style="margin-top: 20px;">1. Probe configuration, and what happens if you deliberately make the readiness check fail (does the pod drop out of the Service's endpoints?).</h4>
+          <p><b>- Step 1: Add a liveness and a readiness probe to at frontend.</b></p>
+          <p>Add proble in webpage-deployment.yaml file and then, run the command to check the result:</p>
+          <img src="https://a3s.fi/swift/v1/myimage/probe-configuration.png" />
+          <p><b>- Step 2: Deliberately fail readiness</b></p>
+          <p>Edit the readiness probe in webpage-deployment.yaml to use a non-existent port. </p>
+          <p>Push the changes to GitHub and observe the result.</p>
+          <p>Check the Pod status and Service endpoints to verify that the Pod is no longer considered ready to receive traffic.</p>
+          <img src="https://a3s.fi/swift/v1/myimage/readiness-fail-check.png" />
+          <p><b>- Step 3: Restore the Readiness Probe </b></p>
+          <p>Change the readiness probe back to the correct port (8080). Push the changes to GitHub and wait for the deployment to complete. Verify that the Pod returns to 1/1 Ready and is included in the Service endpoints again.</p>
+          <h4>2. A sample of the logs your app now produces, and a short reflection on what a real alert rule based on them might look like.</h4>
+          <p style="margin-top: 20px;"><b>- Step 1: Generate a request to the backend API and </b></p>
+          <p>- Edit backend/app.py file and deploy the updated backend/app.py to Rahti.</p>
+          <img src="https://a3s.fi/swift/v1/myimage/backend-app.py.png" />
+          <p><b>- Step 2: Run oc logs to check the application logs and identity the structured fields, including the HTTP method, request path, status code, and response time.</b></p>
+          <img src="https://a3s.fi/swift/v1/myimage/structured-logs.png" />
+          <p>The backend produces structured JSON logs containing the HTTP method, request path, response status, and response time. These logs can be retrieved using oc logs <backend-pod-name>, making them useful for monitoring and troubleshooting.</p>
+          <h3><u>Part 3: Problems encountered and how they were solved.</u></h3>
+          <p style="margin-top: 20px;">- I initially had a problem with Rahti not being able to pull the image because the GitHub Container Registry package was private. I changed the package visibility to public, which solved the issue.
+          <p>- I also encountered a Docker build context problem and learned that the build context must match the paths used in the Dockerfile.</p>
+          <p>- The readiness probe initially had a typo, which I corrected. When testing readiness failure, using a non-existing path did not work as expected, so I used a non-existing port instead.</p>
+          <p>- These issues helped me better understand how Docker, GitHub Actions, and OpenShift work together in a CI/CD pipeline.</p>
+        </div>
+      </div>   
     </Session>
     <script>
       // Existing database read
